@@ -16,19 +16,20 @@ class cached_property(object):
         Source: https://github.com/bottlepy/bottle/commit/fa7733e075da0d790d809aa3d2f53071897e6f76
         """
 
-    def __init__(self, func):
+    def __init__(self, getter, setter):
         self.__doc__ = getattr(func, '__doc__')
-        self.func = func
+        self.getter = getter
+        self.setter = setter
 
     def __get__(self, obj, cls):
         if obj is None:
             return self
-        value = obj.__dict__[self.func.__name__] = self.func(obj)
+        value = obj.__dict__[self.getter.__name__] = self.getter(obj)
         return value
 
     def __set__(self, obj, cls):
-        delattr(obj, self.func.__name__)
-        return self.__set(obj, cls)
+        delattr(obj, self.getter.__name__)
+        return self.setter(obj, cls)
 
 
 class threaded_cached_property(cached_property):
