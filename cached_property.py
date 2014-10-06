@@ -26,6 +26,7 @@ class cached_property(object):
         self.__set = fset
 
     def __get__(self, obj, cls):
+        print "getting", obj, cls
         if obj is None:
             return self
         value = obj.__dict__[self.__get.__name__] = self.__get(obj)
