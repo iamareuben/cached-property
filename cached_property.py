@@ -20,7 +20,7 @@ class cached_property(object):
         self.__doc__ = getattr(fget, '__doc__')
         self.__get = fget
         self.__set = fset
-
+        return property(fget, fset, None, self.__doc__)
     def __get__(self, obj, cls):
         if obj is None:
             return self
