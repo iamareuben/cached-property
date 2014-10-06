@@ -16,10 +16,10 @@ class cached_property(object):
         Source: https://github.com/bottlepy/bottle/commit/fa7733e075da0d790d809aa3d2f53071897e6f76
         """
 
-    def __init__(self, getter, setter=None):
-        self.__doc__ = getattr(getter, '__doc__')
-        self.__get = getter
-        self.__set = setter
+    def __init__(self, fget, fset=None):
+        self.__doc__ = getattr(fget, '__doc__')
+        self.__get = fget
+        self.__set = fset
 
     def __get__(self, obj, cls):
         if obj is None:
