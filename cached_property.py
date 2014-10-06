@@ -18,18 +18,18 @@ class cached_property(object):
 
     def __init__(self, getter, setter=None):
         self.__doc__ = getattr(getter, '__doc__')
-        self.getter = getter
-        self.setter = setter
+        self.__get = getter
+        self.__set = setter
 
     def __get__(self, obj, cls):
         if obj is None:
             return self
-        value = obj.__dict__[self.getter.__name__] = self.getter(obj)
+        value = obj.__dict__[self.__get.__name__] = self.__get(obj)
         return value
 
     def __set__(self, obj, cls):
-        delattr(obj, self.getter.__name__)
-        return self.setter(obj, cls)
+        delattr(obj, self.__get.__name__)
+        return self.__set(obj, cls)
 
 
 class threaded_cached_property(cached_property):
