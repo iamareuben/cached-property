@@ -16,7 +16,7 @@ class cached_property(object):
         Source: https://github.com/bottlepy/bottle/commit/fa7733e075da0d790d809aa3d2f53071897e6f76
         """
 
-    def __init__(self, getter, setter):
+    def __init__(self, getter, setter=None):
         self.__doc__ = getattr(func, '__doc__')
         self.getter = getter
         self.setter = setter
