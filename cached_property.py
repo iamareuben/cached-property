@@ -26,6 +26,10 @@ class cached_property(object):
         value = obj.__dict__[self.func.__name__] = self.func(obj)
         return value
 
+    def __set__(self, obj, cls):
+        delattr(obj, self.func.__name__)
+        return self.__set(obj, cls)
+
 
 class threaded_cached_property(cached_property):
     """ A cached_property version for use in environments where multiple
