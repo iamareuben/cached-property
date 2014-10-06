@@ -22,6 +22,7 @@ class cached_property(object):
         self.__set = fset
 
     def setter(self, fset):
+        print "setter called"
         self.__set = fset
 
     def __get__(self, obj, cls):
