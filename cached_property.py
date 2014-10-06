@@ -20,7 +20,7 @@ class cached_property(object):
         self.__doc__ = getattr(fget, '__doc__')
         self.__get = fget
         self.__set = fset
-        return property(fget, fset, None, self.__doc__)
+
     def __get__(self, obj, cls):
         if obj is None:
             return self
@@ -30,7 +30,7 @@ class cached_property(object):
     def __set__(self, obj, cls):
         delattr(obj, self.__get.__name__)
         return self.__set(obj, cls)
-
+    return property(self.__get, self.__get, None, self.__doc__)
 
 class threaded_cached_property(cached_property):
     """ A cached_property version for use in environments where multiple
