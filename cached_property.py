@@ -21,6 +21,9 @@ class cached_property(object):
         self.__get = fget
         self.__set = fset
 
+    def setter(self, fset):
+        self.__set = fset
+
     def __get__(self, obj, cls):
         if obj is None:
             return self
@@ -30,7 +33,6 @@ class cached_property(object):
     def __set__(self, obj, cls):
         delattr(obj, self.__get.__name__)
         return self.__set(obj, cls)
-    return property(self.__get, self.__get, None, self.__doc__)
 
 class threaded_cached_property(cached_property):
     """ A cached_property version for use in environments where multiple
