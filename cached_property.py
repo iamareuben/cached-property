@@ -17,7 +17,7 @@ class cached_property(object):
         """
 
     def __init__(self, getter, setter=None):
-        self.__doc__ = getattr(func, '__doc__')
+        self.__doc__ = getattr(getter, '__doc__')
         self.getter = getter
         self.setter = setter
 
